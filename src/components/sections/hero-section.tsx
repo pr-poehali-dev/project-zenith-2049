@@ -2,9 +2,9 @@ import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 
 const images = [
+  "/writer-portfolio-website-elegant.jpg",
   "/minimal-architecture-portfolio-with-clean-lines.jpg",
-  "/fashion-photography-editorial-black-and-white.jpg",
-  "/modern-ui-design-portfolio-mockup.jpg",
+  "/visual-storytelling-design-article.jpg",
 ]
 
 export function HeroSection() {
@@ -26,7 +26,6 @@ export function HeroSection() {
       ref={containerRef}
       className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background px-6 py-24"
     >
-      {/* Stacked images */}
       <div className="relative flex items-center justify-center">
         <motion.div
           className="absolute w-[280px] md:w-[320px] aspect-[3/4] rounded-xl overflow-hidden shadow-2xl"
@@ -37,7 +36,7 @@ export function HeroSection() {
         >
           <img
             src={images[0] || "/placeholder.svg"}
-            alt="Портфолио 1"
+            alt="Книга"
             className="w-full h-full object-cover"
           />
         </motion.div>
@@ -51,7 +50,7 @@ export function HeroSection() {
         >
           <img
             src={images[1] || "/placeholder.svg"}
-            alt="Портфолио 2"
+            alt="Обложка книги"
             className="w-full h-full object-cover"
           />
         </motion.div>
@@ -65,21 +64,42 @@ export function HeroSection() {
         >
           <img
             src={images[2] || "/placeholder.svg"}
-            alt="Портфолио 3"
+            alt="Иллюстрации"
             className="w-full h-full object-cover"
           />
         </motion.div>
       </div>
 
       <motion.div
-        className="absolute inset-0 flex items-center justify-center pointer-events-none z-10"
+        className="absolute inset-0 flex flex-col items-center justify-center pointer-events-none z-10 gap-6"
         initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1, delay: 0.8 }}
       >
         <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif text-center text-foreground mix-blend-difference">
-          Ваши работы, <em className="italic">в фокусе</em>.
+          Книга, которую <em className="italic">ждали</em>.
         </h1>
+        <motion.div
+          className="flex flex-col sm:flex-row gap-4 pointer-events-auto"
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 1.2 }}
+        >
+          <a
+            href="#marketplaces"
+            className="bg-primary text-primary-foreground px-8 py-4 rounded-full font-medium text-lg hover:bg-primary/90 transition-colors"
+            data-clickable
+          >
+            Купить книгу
+          </a>
+          <a
+            href="#excerpt"
+            className="border border-foreground/30 text-foreground px-8 py-4 rounded-full font-medium text-lg hover:bg-foreground/5 transition-colors"
+            data-clickable
+          >
+            Читать фрагмент
+          </a>
+        </motion.div>
       </motion.div>
 
       <motion.div

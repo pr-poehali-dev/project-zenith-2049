@@ -1,20 +1,31 @@
 import { motion } from "framer-motion"
 import { Check } from "lucide-react"
 
-const plans = [
+const formats = [
   {
-    name: "Старт",
-    price: "1 200",
-    period: " руб/мес",
-    description: "Для личного портфолио",
-    features: ["5 страниц", "Свой домен", "Базовая аналитика", "Поддержка по email"],
+    name: "Электронная книга",
+    price: "299",
+    period: " ₽",
+    description: "Читайте на любом устройстве",
+    features: [
+      "Форматы EPUB и PDF",
+      "Мгновенная доставка",
+      "Доступ навсегда",
+      "Доступна на всех платформах",
+    ],
   },
   {
-    name: "Про",
-    price: "2 900",
-    period: " руб/мес",
-    description: "Для растущих авторов",
-    features: ["Безлимит страниц", "Приоритет поддержки", "Расширенная аналитика", "Свой брендинг", "Работа в команде"],
+    name: "Полная коллекция",
+    price: "999",
+    period: " ₽",
+    description: "Всё в одном — лучший выбор",
+    features: [
+      "Электронная книга",
+      "Аудиокнига",
+      "Мультфильм в HD",
+      "Бонусные материалы",
+      "Автограф автора (PDF)",
+    ],
     popular: true,
   },
 ]
@@ -29,12 +40,14 @@ export function PricingSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-3xl md:text-5xl font-serif text-foreground">Простые и понятные цены</h2>
-          <p className="text-muted-foreground mt-4 max-w-md mx-auto">Начните бесплатно, платите когда готовы.</p>
+          <h2 className="text-3xl md:text-5xl font-serif text-foreground">Выберите свой формат</h2>
+          <p className="text-muted-foreground mt-4 max-w-md mx-auto">
+            Читайте, слушайте, смотрите — история доступна в любом формате.
+          </p>
         </motion.div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-3xl mx-auto">
-          {plans.map((plan, i) => (
+          {formats.map((plan, i) => (
             <motion.div
               key={i}
               className={`relative bg-background rounded-xl p-8 ticket-edge ${plan.popular ? "ring-2 ring-primary" : ""}`}
@@ -75,11 +88,20 @@ export function PricingSection() {
                     : "bg-secondary text-foreground hover:bg-accent/30"
                 }`}
               >
-                Начать
+                Купить сейчас
               </button>
             </motion.div>
           ))}
         </div>
+
+        <motion.p
+          className="text-center text-muted-foreground text-sm mt-10"
+          initial={{ opacity: 0 }}
+          whileInView={{ opacity: 1 }}
+          viewport={{ once: true }}
+        >
+          Также доступно на Литрес, Ozon, Wildberries и других платформах
+        </motion.p>
       </div>
     </section>
   )

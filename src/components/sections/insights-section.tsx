@@ -3,32 +3,37 @@ import { useState } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ArrowRight } from "lucide-react"
 
-const articles = [
+const chapters = [
   {
-    title: "Искусство визуального сторителлинга",
-    category: "Дизайн",
+    title: "Глава 1. Начало пути",
+    category: "Фрагмент",
     image: "/visual-storytelling-design-article.jpg",
+    text: "Утро было серым, как старая фотография. Герой стоял у окна и думал о том, что всё могло быть иначе...",
   },
   {
-    title: "Как создать личный бренд онлайн",
-    category: "Стратегия",
+    title: "Глава 4. Перекрёсток",
+    category: "Фрагмент",
+    image: "/writer-portfolio-website-elegant.jpg",
+    text: "Выбор никогда не бывает простым. Особенно когда на весах — всё, что дорого твоему сердцу...",
+  },
+  {
+    title: "Глава 9. Возвращение",
+    category: "Фрагмент",
     image: "/personal-branding-digital-marketing.jpg",
+    text: "Дом — это не место. Это люди, которые ждут тебя. И эта мысль согревала его в самые тёмные минуты...",
   },
   {
-    title: "Тренды типографики 2025",
-    category: "Типографика",
+    title: "Эпилог. Спустя годы",
+    category: "Фрагмент",
     image: "/typography-trends-modern-fonts.jpg",
-  },
-  {
-    title: "Минимализм в дизайне портфолио",
-    category: "Вдохновение",
-    image: "/placeholder.svg?height=200&width=300",
+    text: "Жизнь расставила всё по местам. Не так, как он мечтал. Лучше — потому что правда всегда лучше мечты...",
   },
 ]
 
 export function InsightsSection() {
   const [hoveredIndex, setHoveredIndex] = useState<number | null>(null)
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 })
+  const [expanded, setExpanded] = useState<number | null>(null)
 
   const handleMouseMove = (e: React.MouseEvent) => {
     setMousePosition({ x: e.clientX, y: e.clientY })
@@ -43,36 +48,57 @@ export function InsightsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
         >
-          Статьи
+          Фрагменты книги
         </motion.p>
 
         <div className="divide-y divide-border">
-          {articles.map((article, i) => (
-            <motion.a
+          {chapters.map((chapter, i) => (
+            <motion.div
               key={i}
-              href="#"
-              className="group flex items-center justify-between py-6 relative"
+              className="group py-6 relative cursor-pointer"
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1 }}
               onMouseEnter={() => setHoveredIndex(i)}
               onMouseLeave={() => setHoveredIndex(null)}
-              whileHover={{ paddingLeft: 16, paddingRight: 16 }}
+              onClick={() => setExpanded(expanded === i ? null : i)}
               data-clickable
             >
-              <div className="flex-1">
-                <span className="text-xs text-muted-foreground uppercase tracking-wider">{article.category}</span>
-                <h3 className="font-serif text-xl md:text-2xl text-foreground mt-1 group-hover:text-primary transition-colors">
-                  {article.title}
-                </h3>
+              <div className="flex items-center justify-between">
+                <div className="flex-1">
+                  <span className="text-xs text-muted-foreground uppercase tracking-wider">{chapter.category}</span>
+                  <h3 className="font-serif text-xl md:text-2xl text-foreground mt-1 group-hover:text-primary transition-colors">
+                    {chapter.title}
+                  </h3>
+                </div>
+                <motion.div
+                  animate={{ rotate: expanded === i ? 90 : 0 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-all" />
+                </motion.div>
               </div>
-              <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
-            </motion.a>
+
+              <AnimatePresence>
+                {expanded === i && (
+                  <motion.div
+                    initial={{ height: 0, opacity: 0 }}
+                    animate={{ height: "auto", opacity: 1 }}
+                    exit={{ height: 0, opacity: 0 }}
+                    transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
+                    className="overflow-hidden"
+                  >
+                    <p className="font-serif text-lg text-foreground/70 leading-relaxed mt-4 pb-2 italic">
+                      {chapter.text}
+                    </p>
+                  </motion.div>
+                )}
+              </AnimatePresence>
+            </motion.div>
           ))}
         </div>
 
-        {/* Floating hover image */}
         <AnimatePresence>
           {hoveredIndex !== null && (
             <motion.div
@@ -88,8 +114,8 @@ export function InsightsSection() {
               transition={{ duration: 0.2 }}
             >
               <img
-                src={articles[hoveredIndex].image || "/placeholder.svg"}
-                alt={articles[hoveredIndex].title}
+                src={chapters[hoveredIndex].image || "/placeholder.svg"}
+                alt={chapters[hoveredIndex].title}
                 className="w-full h-auto"
               />
             </motion.div>
