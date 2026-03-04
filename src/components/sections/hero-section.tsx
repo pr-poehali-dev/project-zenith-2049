@@ -1,12 +1,10 @@
 import { useRef } from "react"
 import { motion, useScroll, useTransform } from "framer-motion"
 
-const BOOK_COVER = "https://cdn.poehali.dev/projects/4dbc316a-60fb-426d-95b2-673d7b39be8f/bucket/20196a7e-fbd5-4f33-a304-1c7fae087185.png"
-
 const images = [
-  BOOK_COVER,
-  BOOK_COVER,
-  BOOK_COVER,
+  "/writer-portfolio-website-elegant.jpg",
+  "/minimal-architecture-portfolio-with-clean-lines.jpg",
+  "/visual-storytelling-design-article.jpg",
 ]
 
 export function HeroSection() {
