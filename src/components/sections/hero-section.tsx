@@ -49,7 +49,7 @@ export function HeroSection() {
           transition={{ duration: 1, delay: 0.4, ease: [0.16, 1, 0.3, 1] }}
         >
           <img
-            src={images[1] || "/placeholder.svg"}
+            src="https://cdn.poehali.dev/projects/4dbc316a-60fb-426d-95b2-673d7b39be8f/bucket/30e870fd-844d-49b6-86af-1cb01443d5e4.png"
             alt="Обложка книги"
             className="w-full h-full object-cover"
           />
